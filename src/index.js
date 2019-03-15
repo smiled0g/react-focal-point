@@ -33,7 +33,7 @@ export default class FocalPoint extends React.Component {
   }
 
   render() {
-    const { borderRadius = 4 } = this.props
+    const { borderRadius = 4, onMaskClicked } = this.props
     const focalPoints = this.getfocalPoints()
 
     return (
@@ -72,7 +72,7 @@ export default class FocalPoint extends React.Component {
           </defs>
 
           <rect
-            onClick={() => alert('click')}
+            onClick={onMaskClicked ? onMaskClicked : () => null}
             x="0"
             y="0"
             width="100%"

@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save react-focal-point
+yarn add react-focal-point
 ```
 
 ## Usage
