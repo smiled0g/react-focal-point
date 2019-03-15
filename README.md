@@ -13,14 +13,35 @@ npm install --save react-focal-point
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'react-focal-point'
+import FocalPoint from 'react-focal-point'
 
-class Example extends Component {
-  render () {
+class Example extends React.Component {
+  render() {
     return (
-      <MyComponent />
+      <React.Fragment>
+        <FocalPoint
+          points={{
+            key1: '.p1',
+            key2: '.p2',
+          }}
+        />
+        <pre className="p1">
+          Amet est labore non nisi nulla ullamco dolor exercitation cupidatat ad
+          excepteur commodo ut. Non fugiat ipsum amet ullamco irure ullamco
+          ullamco cillum. Enim labore minim adipisicing laboris minim amet anim
+          esse consectetur esse laborum Lorem dolor excepteur. Pariatur elit non
+          sit non aliquip irure est.
+        </pre>
+        <pre className="p2">
+          Et irure aute et consequat eu laborum exercitation. Amet elit dolore
+          magna proident occaecat duis duis dolore eiusmod adipisicing. Ullamco
+          fugiat Lorem magna et fugiat voluptate minim duis cillum cupidatat
+          consectetur mollit. Ullamco duis culpa sit ipsum elit est labore id
+          labore aute voluptate.
+        </pre>
+      </React.Fragment>
     )
   }
 }

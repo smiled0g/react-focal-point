@@ -1,8 +1,17 @@
-/* add css styles here (optional) */
+.mask {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 1000000000;
+  transition: all 250ms ease-in-out;
+}
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+.mask > rect {
+  pointer-events: visiblePainted;
+}
+
+.mask mask > rect {
+  transition: all 450ms ease-in-out;
 }

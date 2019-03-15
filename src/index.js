@@ -1,21 +1,86 @@
-import React, { Component } from 'react'
+import React from 'react'
+import styles from './styles.css'
 import PropTypes from 'prop-types'
 
-import styles from './styles.css'
-
-export default class ExampleComponent extends Component {
+export default class FocalPoint extends React.Component {
   static propTypes = {
-    text: PropTypes.string
+    points: PropTypes.object,
+    padding: PropTypes.number,
+    borderRadius: PropTypes.number,
+    onMaskClicked: PropTypes.func,
+  }
+
+  getfocalPoints() {
+    const { padding = 8, points = {} } = this.props
+
+    return Object.entries(points)
+      .map(([id, selector]) => {
+        const el = window.document.querySelector(selector)
+        if (el) {
+          const { top, right, bottom, left } = el.getBoundingClientRect()
+          return {
+            id,
+            x: left - padding,
+            y: top - padding,
+            w: right - left + 2 * padding,
+            h: bottom - top + 2 * padding,
+          }
+        }
+
+        return null
+      })
+      .filter(d => d)
   }
 
   render() {
-    const {
-      text
-    } = this.props
+    const { borderRadius = 4 } = this.props
+    const focalPoints = this.getfocalPoints()
 
     return (
-      <div className={styles.test}>
-        Example Component: {text}
+      <div
+        className={styles.mask}
+        style={
+          focalPoints.length
+            ? {
+                opacity: 1,
+                pointerEvents: 'auto',
+              }
+            : {
+                opacity: 0,
+                pointerEvents: 'none',
+              }
+        }
+      >
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="focalPointMask">
+              <rect width="100%" height="100%" fill="white" />
+              {focalPoints.map(({ id, w, h, x, y }) => (
+                <rect
+                  id={id}
+                  key={id}
+                  width={w}
+                  height={h}
+                  x={x}
+                  y={y}
+                  fill="black"
+                  rx={borderRadius}
+                  ry={borderRadius}
+                />
+              ))}
+            </mask>
+          </defs>
+
+          <rect
+            onClick={() => alert('click')}
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            fill="rgba(0,0,0,0.7)"
+            mask="url(#focalPointMask)"
+          />
+        </svg>
       </div>
     )
   }

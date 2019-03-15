@@ -57,5 +57,10 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "prettier": {
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": true
+  }
 }
