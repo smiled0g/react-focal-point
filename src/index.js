@@ -43,7 +43,7 @@ export default class FocalPoint extends React.Component {
           focalPoints.length
             ? {
                 opacity: 1,
-                pointerEvents: 'auto',
+                pointerEvents: 'none',
               }
             : {
                 opacity: 0,
