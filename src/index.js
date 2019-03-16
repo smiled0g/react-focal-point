@@ -10,6 +10,28 @@ export default class FocalPoint extends React.Component {
     onMaskClicked: PropTypes.func,
   }
 
+  componentDidMount() {
+    // Create a style tag to make the masked elements clickable later on
+    this.styleTag = document.createElement('style')
+    document.head.appendChild(this.styleTag)
+    this.injectPointStyle()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.points !== prevProps.points) {
+      this.injectPointStyle()
+    }
+  }
+
+  injectPointStyle() {
+    this.styleTag.innerHTML = `
+      ${Object.values(this.props.points).join(', ')} {
+        z-index: 1000000001;
+        position: relative;
+      }
+    `
+  }
+
   getfocalPoints() {
     const { padding = 8, points = {} } = this.props
 
@@ -43,7 +65,7 @@ export default class FocalPoint extends React.Component {
           focalPoints.length
             ? {
                 opacity: 1,
-                pointerEvents: 'none',
+                pointerEvents: 'auto',
               }
             : {
                 opacity: 0,
